@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+    volumes:
+      - hermes-data:/config
     environment:
       - HERMES_DESKTOP_REMOTE_URL=${HERMES_DESKTOP_REMOTE_URL}
       - HERMES_DESKTOP_REMOTE_TOKEN=${HERMES_DESKTOP_REMOTE_TOKEN}
@@ -24,3 +26,6 @@ services:
       - WATCHTOWER_POLL_INTERVAL=3600
       - WATCHTOWER_INCLUDE_STOPPED=true
     command: hermes-desktop
+
+volumes:
+  hermes-data:
