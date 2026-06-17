@@ -1,0 +1,1 @@
+/opt/hermes-desktop/Hermes --no-sandbox --disable-dev-shm-usage --disable-gpu
