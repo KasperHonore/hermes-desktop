@@ -16,7 +16,7 @@ Runs the Hermes Electron app inside a KasmVNC container with auto-resize, virtua
   <Category>AI: Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:3000]</WebUI>
   <Icon>https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/icons/hermes-desktop.png</Icon>
-  <TemplateURL>https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/hermes-desktop/hermes-desktop.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/hermes-desktop.xml</TemplateURL>
   <ExtraParams>--shm-size=1g</ExtraParams>
   <ExtraSearchTerms>hermes nous ai agent llm vnc remote desktop</ExtraSearchTerms>
   <Requires>A running Hermes Agent backend is required. Install it separately or connect to a remote instance via Tailscale.</Requires>
