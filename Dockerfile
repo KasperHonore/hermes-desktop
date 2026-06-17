@@ -47,5 +47,12 @@ RUN chmod +x /custom-cont-init.d/disable-auth
 ENV HERMES_DESKTOP_DISABLE_GPU=1
 ENV TITLE="Hermes Desktop"
 ENV NO_DECOR=true
+ENV DISABLE_AUTH=false
+
+LABEL net.unraid.docker.webui="http://[IP]:[PORT:3000]"
+LABEL net.unraid.docker.icon="https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/icons/hermes-desktop.png"
+LABEL org.opencontainers.image.title="Hermes Desktop"
+LABEL org.opencontainers.image.description="Access Hermes Agent through a web-based desktop"
+LABEL org.opencontainers.image.source="https://github.com/KasperHonore/hermes-desktop"
 
 EXPOSE 3000

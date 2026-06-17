@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>hermes-desktop</Name>
+  <Repository>ghcr.io/kasperhonore/hermes-desktop:latest</Repository>
+  <Registry>https://github.com/KasperHonore/hermes-desktop/pkgs/container/hermes-desktop</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/KasperHonore/hermes-desktop/issues</Support>
+  <Project>https://github.com/KasperHonore/hermes-desktop</Project>
+  <Overview>Access Hermes Agent through a web-based desktop that works on any device including mobile.&#xD;
+&#xD;
+Runs the Hermes Electron app inside a KasmVNC container with auto-resize, virtual keyboard, and clipboard sync. Connects to a Hermes Agent backend running locally or remotely (e.g. via Tailscale).&#xD;
+&#xD;
+[b]Tailscale integration:[/b] If your Hermes backend is on another machine, install the Tailscale plugin on Unraid and use its Tailscale IP (100.x.x.x) as the backend URL. Enable "Use Tailscale" on this container to access the desktop from anywhere via HTTPS.</Overview>
+  <Category>AI: Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <Icon>https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/icons/hermes-desktop.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/KasperHonore/hermes-desktop/main/unraid-templates/hermes-desktop/hermes-desktop.xml</TemplateURL>
+  <ExtraParams>--shm-size=1g</ExtraParams>
+  <ExtraSearchTerms>hermes nous ai agent llm vnc remote desktop</ExtraSearchTerms>
+  <Requires>A running Hermes Agent backend is required. Install it separately or connect to a remote instance via Tailscale.</Requires>
+  <License>MIT</License>
+
+  <!-- Primary settings -->
+  <Config Name="WebUI Port"
+          Target="3000"
+          Default="3000"
+          Mode="tcp"
+          Description="KasmVNC web client port. Open this in your browser to access the Hermes desktop."
+          Type="Port"
+          Display="always"
+          Required="true"
+          Mask="false">3000</Config>
+
+  <Config Name="Backend URL"
+          Target="HERMES_DESKTOP_REMOTE_URL"
+          Default=""
+          Description="URL of your Hermes Agent backend. Use a LAN IP (e.g. http://192.168.1.50:9119) or a Tailscale IP (e.g. http://100.x.x.x:9119)."
+          Type="Variable"
+          Display="always"
+          Required="true"
+          Mask="false"/>
+
+  <Config Name="Backend Token"
+          Target="HERMES_DESKTOP_REMOTE_TOKEN"
+          Default=""
+          Description="Session token from your Hermes Agent backend. Found in the dashboard logs on first startup."
+          Type="Variable"
+          Display="always"
+          Required="true"
+          Mask="true"/>
+
+  <Config Name="Config Path"
+          Target="/config"
+          Default="/mnt/user/appdata/hermes-desktop"
+          Mode="rw"
+          Description="KasmVNC configuration and state directory."
+          Type="Path"
+          Display="always"
+          Required="true"
+          Mask="false">/mnt/user/appdata/hermes-desktop</Config>
+
+  <!-- Advanced settings -->
+  <Config Name="PUID"
+          Target="PUID"
+          Default="99"
+          Description="User ID for file permissions. Unraid default: 99 (nobody)."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="false">99</Config>
+
+  <Config Name="PGID"
+          Target="PGID"
+          Default="100"
+          Description="Group ID for file permissions. Unraid default: 100 (users)."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="false">100</Config>
+
+  <Config Name="Timezone"
+          Target="TZ"
+          Default="Etc/UTC"
+          Description="Container timezone (e.g. America/New_York, Europe/London)."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="false">Etc/UTC</Config>
+
+  <Config Name="Disable Auth"
+          Target="DISABLE_AUTH"
+          Default="false|true"
+          Description="Disable KasmVNC basic auth. Only set to true when access is secured by Tailscale ACLs or another network-layer mechanism."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="false">false</Config>
+
+  <Config Name="Disable GPU"
+          Target="HERMES_DESKTOP_DISABLE_GPU"
+          Default="1|0"
+          Description="Disable GPU acceleration in Electron. Recommended to keep enabled (1) for containers."
+          Type="Variable"
+          Display="advanced"
+          Required="false"
+          Mask="false">1</Config>
+
+  <Config Name="Window Title"
+          Target="TITLE"
+          Default="Hermes Desktop"
+          Description="Title shown in the KasmVNC browser tab."
+          Type="Variable"
+          Display="advanced-hide"
+          Required="false"
+          Mask="false">Hermes Desktop</Config>
+
+  <Config Name="No Window Decorations"
+          Target="NO_DECOR"
+          Default="true|false"
+          Description="Remove window decorations for a cleaner fullscreen experience."
+          Type="Variable"
+          Display="advanced-hide"
+          Required="false"
+          Mask="false">true</Config>
+</Container>
