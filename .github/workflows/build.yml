@@ -7,9 +7,6 @@ on:
   push:
     branches: [main]
 
-env:
-  IMAGE: ghcr.io/${{ github.repository }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,7 +42,7 @@ jobs:
           build-args: |
             HERMES_SHA=${{ steps.hermes.outputs.sha }}
           tags: |
-            ${{ env.IMAGE }}:latest
-            ${{ env.IMAGE }}:${{ steps.hermes.outputs.sha }}
+            ghcr.io/kasperhonore/hermes-desktop:latest
+            ghcr.io/kasperhonore/hermes-desktop:${{ steps.hermes.outputs.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
